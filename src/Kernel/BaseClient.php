@@ -40,7 +40,7 @@ class BaseClient {
      */
     protected $needAccessToken = true;
 
-    protected $needOpenid = true;
+    protected $needOpenid = false;
 
     /**
      * @var bool
