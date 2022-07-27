@@ -28,9 +28,9 @@ class Application extends ServiceContainer
     protected $providers = [
         \EasyShortVideo\Ixigua\OpenPlatform\Auth\ServiceProvider::class,
 //         \EasyShortVideo\Ixigua\OpenPlatform\FansData\ServiceProvider::class,
-//         \EasyShortVideo\Ixigua\OpenPlatform\UserData\ServiceProvider::class,
+         \EasyShortVideo\Ixigua\OpenPlatform\UserData\ServiceProvider::class,
          \EasyShortVideo\Ixigua\OpenPlatform\Video\ServiceProvider::class,
-//         \EasyShortVideo\Ixigua\OpenPlatform\VideoData\ServiceProvider::class,
+         \EasyShortVideo\Ixigua\OpenPlatform\VideoData\ServiceProvider::class,
 //         \EasyShortVideo\Ixigua\OpenPlatform\Base\ServiceProvider::class
     ];
 
