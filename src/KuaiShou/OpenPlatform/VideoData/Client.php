@@ -10,7 +10,7 @@ class Client extends BaseClient
 {
     protected $postAccessToken = false;
 
-    protected $needOpenid = true;
+    protected $needOpenid = false;
 
     /**
      * 查询单一视频详情

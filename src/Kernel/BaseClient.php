@@ -286,7 +286,7 @@ class BaseClient {
                     if ($this->postAccessToken) {
                         $request = $this->accessToken->applyToPostRequest($request, $options);
                     } else {
-                        if(isset($this->needOpenid)){
+                        if($this->needOpenid){
                             $request = $this->accessToken->applyNeedOpenIdToRequest($request, $options); //快手他不要openid 要appid
                         }else{
                             $request = $this->accessToken->applyToRequest($request, $options);

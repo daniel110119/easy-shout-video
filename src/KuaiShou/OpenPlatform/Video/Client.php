@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 class Client extends BaseClient
 {
     protected $postAccessToken = false;
-
+    protected $needOpenid = false;
     protected function createVideo()
     {
 
