@@ -34,9 +34,14 @@ class Client extends BaseClient
     {
         $filesize = filesize($filePath);
         if ($filesize <= 1024 * 1024 * 5) {
-            return $this->httpUpload('video/upload/', ['video' => $filePath]);
+            $response = $this->httpUpload('video/upload/', ['video' => $filePath]);
         }else{
-            return $this->partUpload($filePath);
+            $response = $this->partUpload($filePath);
+        }
+        if($response['data']['error_code'] == 0){
+            return $response['data']['video']['video_id'];
+        }else{
+            throw new HttpException(json_encode($response,1));
         }
     }
 
@@ -64,6 +69,7 @@ class Client extends BaseClient
         return $this->httpPostJson('video/part/complete/', [], [
             'upload_id' => $initInfo['data']['upload_id']
         ]);
+
     }
 
     /**
@@ -76,7 +82,7 @@ class Client extends BaseClient
      * @throws InvalidConfigException
 
      */
-    public function createVideo(string $videoId, array $body = []): array
+    public function publishVideo(string $videoId, array $body = []): array
     {
         $body['video_id'] = $videoId;
 

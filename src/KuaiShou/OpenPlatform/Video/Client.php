@@ -15,6 +15,7 @@ class Client extends BaseClient
 {
     protected $postAccessToken = false;
     protected $needOpenid = true;
+
     protected function createVideo()
     {
 
@@ -33,6 +34,39 @@ class Client extends BaseClient
         }
     }
 
+    /**
+     * 返回视频id
+     * @param array $form
+     * @param string $cover_path
+     * @param string $upload_token
+     * @return mixed
+     * @throws GuzzleException
+     * @throws HttpException
+     * @throws \EasyShortVideo\Kernel\Exceptions\InvalidConfigException
+     */
+    public function publishVideo(array $form, string $cover_path, string $upload_token)
+    {
+        $multipart[] = [
+            'name' => 'cover',
+            'contents' => fopen($cover_path, 'r'),
+        ];
+
+        foreach ($form as $name => $contents) {
+            $multipart[] = compact('name', 'contents');
+        }
+
+        $response = $this->request(
+            'openapi/photo/publish',
+            'POST',
+            ['query' => ['upload_token'=>$upload_token], 'multipart' => $multipart, 'connect_timeout' => 300, 'timeout' => 300, 'read_timeout' => 300]
+        );
+        if ($response['result'] == 1) {
+            return $response['video_info']['photo_id'];
+        } else {
+            throw new HttpException(json_encode($response));
+        }
+    }
+
     public function uploadVideo(string $filePath)
     {
         $filesize = filesize($filePath);
@@ -40,7 +74,7 @@ class Client extends BaseClient
         $endpoint = $data['endpoint'];
         $upload_token = $data['upload_token'];
         if ($filesize <= 1024 * 1024 * 10) {
-            return $this->kuaiShouHttpUpload($endpoint,$upload_token,$filePath);
+            return $this->kuaiShouHttpUpload($endpoint, $upload_token, $filePath);
         } else {
             return $this->partUpload($endpoint, $upload_token, $filePath);
         }
@@ -56,10 +90,10 @@ class Client extends BaseClient
      * @throws Exceptions\InvalidConfigException
      * @throws GuzzleException
      */
-    public function kuaiShouHttpUpload(string $url, string $upload_token,string $filepath)
+    protected function kuaiShouHttpUpload(string $url, string $upload_token, string $filepath)
     {
 
-        return $this->request(
+        $complete = $this->request(
             "http://{$url}",
             'POST',
             [
@@ -75,12 +109,17 @@ class Client extends BaseClient
                 'read_timeout' => 300
             ]
         );
+        if ($complete['result'] == 1) {
+            return $upload_token;
+        } else {
+            throw new HttpException(json_encode($complete));
+        }
     }
 
     /**
      * 分片上传视频
      */
-    public function partUpload(string $endpoint, string $upload_token, string $filePath): string
+    protected function partUpload(string $endpoint, string $upload_token, string $filePath): string
     {
         $checkNumber = $this->KuaiShouChunkUpload("http://{$endpoint}", $filePath, [
             'upload_token' => $upload_token

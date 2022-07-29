@@ -79,7 +79,7 @@ class Client extends BaseClient
      * claim_origin    bool    是否声明原创（授权账号需要在西瓜视频端内开通「实名认证」）        true
      * abstract    string    视频简介，400字以内    简介    true
      */
-    public function createVideo(string $videoId, array $body = []): array
+    public function publishVideo(string $videoId, array $body = []): array
     {
         $body['video_id'] = $videoId;
 
