@@ -192,6 +192,6 @@ class Client extends BaseClient
             $chunkIndex++;
         }
 
-        return $chunkNum - 1;
+        return $chunkNum;
     }
 }
