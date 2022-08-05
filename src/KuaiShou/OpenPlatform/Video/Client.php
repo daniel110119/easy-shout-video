@@ -94,7 +94,7 @@ class Client extends BaseClient
     {
 
         $complete = $this->request(
-            "http://{$url}",
+            "http://{$url}/api/upload",
             'POST',
             [
                 'query' => [
@@ -121,10 +121,10 @@ class Client extends BaseClient
      */
     protected function partUpload(string $endpoint, string $upload_token, string $filePath): string
     {
-        $checkNumber = $this->KuaiShouChunkUpload("http://{$endpoint}", $filePath, [
+        $checkNumber = $this->KuaiShouChunkUpload("http://{$endpoint}/api/upload/fragment", $filePath, [
             'upload_token' => $upload_token
         ]);
-        $complete = $this->httpPostJson("http://{$endpoint}", [], [
+        $complete = $this->httpPostJson("http://{$endpoint}/api/upload/complete", [], [
             'upload_token' => $upload_token,
             'fragment_count' => $checkNumber
         ]);
