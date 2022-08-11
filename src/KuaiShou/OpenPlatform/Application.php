@@ -11,6 +11,7 @@ use EasyShortVideo\KuaiShou\OpenPlatform\Auth\AccessToken;
  * @property \EasyShortVideo\KuaiShou\OpenPlatform\Base\ServiceProvider $base
  * @property \EasyShortVideo\KuaiShou\OpenPlatform\Video\ServiceProvider $video
  * @property \EasyShortVideo\KuaiShou\OpenPlatform\VideoData\ServiceProvider $video_data
+ * @property \EasyShortVideo\KuaiShou\OpenPlatform\UserData\ServiceProvider $user_data
  */
 class Application extends ServiceContainer
 {
@@ -20,6 +21,7 @@ class Application extends ServiceContainer
         \EasyShortVideo\KuaiShou\OpenPlatform\Auth\ServiceProvider::class,
         \EasyShortVideo\KuaiShou\OpenPlatform\Video\ServiceProvider::class,
         \EasyShortVideo\KuaiShou\OpenPlatform\VideoData\ServiceProvider::class,
+        \EasyShortVideo\KuaiShou\OpenPlatform\UserData\ServiceProvider::class,
     ];
 
 

@@ -1,8 +1,7 @@
 <?php
 
 
-
-namespace  EasyShortVideo\Tiktok\OpenPlatform\UserData;
+namespace EasyShortVideo\Tiktok\OpenPlatform\UserData;
 
 use  EasyShortVideo\Kernel\BaseClient;
 use  EasyShortVideo\Kernel\Exceptions\HttpException;
@@ -15,9 +14,15 @@ use Psr\Http\Message\ResponseInterface;
  * Class Client.
  *
  */
-class Client extends BaseClient {
+class Client extends BaseClient
+{
 
     protected $postAccessToken = false;
+
+    public function getFansList(int $cursor = 0)
+    {
+        return $this->httpGet('fans/list/', ['cursor' => $cursor, 'count' => 20]);
+    }
 
     /**
      * 获取用户视频情况
@@ -27,7 +32,8 @@ class Client extends BaseClient {
      * @throws InvalidConfigException
      * @throws GuzzleException
      */
-    public function item(int $date_type = 7) {
+    public function item(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/item/', ['date_type' => $date_type]);
     }
 
@@ -39,7 +45,8 @@ class Client extends BaseClient {
      * @throws HttpException
      * @throws InvalidConfigException
      */
-    public function fans(int $date_type = 7) {
+    public function fans(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/fans/', ['date_type' => $date_type]);
     }
 
@@ -51,7 +58,8 @@ class Client extends BaseClient {
      * @throws HttpException
      * @throws InvalidConfigException
      */
-    public function like(int $date_type = 7) {
+    public function like(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/like/', ['date_type' => $date_type]);
     }
 
@@ -63,7 +71,8 @@ class Client extends BaseClient {
      * @throws HttpException
      * @throws InvalidConfigException
      */
-    public function comment(int $date_type = 7) {
+    public function comment(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/comment/', ['date_type' => $date_type]);
     }
 
@@ -75,7 +84,8 @@ class Client extends BaseClient {
      * @throws HttpException
      * @throws InvalidConfigException
      */
-    public function share(int $date_type = 7) {
+    public function share(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/share/', ['date_type' => $date_type]);
     }
 
@@ -87,7 +97,8 @@ class Client extends BaseClient {
      * @throws HttpException
      * @throws InvalidConfigException
      */
-    public function profile(int $date_type = 7) {
+    public function profile(int $date_type = 7)
+    {
         return $this->httpGet('data/external/user/profile/', ['date_type' => $date_type]);
     }
 

@@ -8,6 +8,11 @@ class Client extends BaseClient
 {
     protected $postAccessToken = false;
 
+    public function getFansList(int $cursor = 0)
+    {
+        return $this->httpGet('fans/list/', ['cursor' => $cursor, 'count' => 20]);
+    }
+
     /**
      * 获取用户视频情况
      * @param int $date_type
@@ -18,7 +23,7 @@ class Client extends BaseClient
      */
     public function item(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/item/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/item/', ['date_type' => $date_type]);
     }
 
     /**
@@ -31,7 +36,7 @@ class Client extends BaseClient
      */
     public function fans(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/fans/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/fans/', ['date_type' => $date_type]);
     }
 
     /**
@@ -44,7 +49,7 @@ class Client extends BaseClient
      */
     public function like(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/like/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/like/', ['date_type' => $date_type]);
     }
 
     /**
@@ -57,7 +62,7 @@ class Client extends BaseClient
      */
     public function comment(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/comment/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/comment/', ['date_type' => $date_type]);
     }
 
     /**
@@ -70,7 +75,7 @@ class Client extends BaseClient
      */
     public function share(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/share/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/share/', ['date_type' => $date_type]);
     }
 
     /**
@@ -83,6 +88,6 @@ class Client extends BaseClient
      */
     public function profile(int $date_type = 7)
     {
-        return $this->httpGet('data/external/user/profile/',['date_type'=>$date_type]);
+        return $this->httpGet('data/external/user/profile/', ['date_type' => $date_type]);
     }
 }
