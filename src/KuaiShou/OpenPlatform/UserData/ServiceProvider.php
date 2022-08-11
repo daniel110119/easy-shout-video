@@ -2,7 +2,7 @@
 
 namespace EasyShortVideo\KuaiShou\OpenPlatform\UserData;
 
-use EasyShortVideo\Tiktok\OpenPlatform\UserData\Client;
+use EasyShortVideo\KuaiShou\OpenPlatform\UserData\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
